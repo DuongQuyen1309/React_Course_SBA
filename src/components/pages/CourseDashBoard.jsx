@@ -1,6 +1,8 @@
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import { Container, Table, Button, Row, Col} from "react-bootstrap";
 import CourseCard from "../common/CourseCard";
+import CartModal from '../common/CartModal';
+import UserContext from '../context/UserContext';
 const courses = [
     {
         code: "CSC101",
@@ -60,6 +62,7 @@ const CourseDashBoard = () => {
     const [currentCourses, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
     const [cart, setCart] = useState(getCartInLocalStorage());
+    const {showModal, handleCloseModal} = useContext(UserContext);
 
     useEffect(()=>{
         async function getCourse(){
@@ -94,14 +97,14 @@ const CourseDashBoard = () => {
         const updatedCart = cart.filter(item => item.code !== courseCode);
         setCart(updatedCart);
     }
-
+    
     return (
     <Container>
         <h2>Course DashBoard</h2>
         <Row>
             {courses.map((course, index) => {
                 return (
-                <Col md={3} className="mb-3" key={index}>
+                <Col md={3} className="mb-3">
                      <CourseCard course={course} onAddToCart={handleAddToCart}/>
                 </Col>);
             })}
@@ -124,7 +127,7 @@ const CourseDashBoard = () => {
                         {currentCourses?(
                             currentCourses.map((course, index) => {
                                 return(
-                                <tr key={index}>
+                                <tr>
                                     <td>{course.code}</td>
                                     <td>{course.title}</td>
                                     <td>{course.duration}</td>
@@ -148,7 +151,7 @@ const CourseDashBoard = () => {
                 <h5>Loading value....</h5>
             )
         }
-        
+        <CartModal showModals = {showModal} cartItems = {cart} closeModals = {handleCloseModal} removeItems = {handleRemoveFromCart}/>
     </Container>
     );
 }

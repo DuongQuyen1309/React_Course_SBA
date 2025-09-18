@@ -6,9 +6,29 @@ import Navbar from 'react-bootstrap/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import headerLogo from '../../assets/logo_pineapple.png';
 import UserContext from '../context/UserContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 const Header = () => {
-  const {authenUser, login, logout} = useContext(UserContext);
+  const {authenUser, login, logout, handleShowModal, handleCloseModal} = useContext(UserContext);
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(()=> {
+    const handleLocalStorageChange = () => {
+      const selectedItem = localStorage.getItem('myCart');
+      const cart = selectedItem ? JSON.parse(selectedItem) : [];
+      setCartCount(cart.length);
+    }
+
+    handleLocalStorageChange();
+    // sự kiện storage này sẽ được kích hoạt khi local storage từ môt tab khác
+    // nhưng không bắn ra ở cùng tab thực hiện
+    // nếu muốn cùng 1 tab thực hiện ngay thì cần gọi thẳng handleLocalStorageChange, 
+    // hoặc tự tạo một sự kiện riêng
+    window.addEventListener('storage', handleLocalStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleLocalStorageChange);
+    }
+  },[])
   return (
     <Navbar expand="lg" bg="white" className="border-bottom" fixed="top">
       <Container>
@@ -40,8 +60,8 @@ const Header = () => {
                   <Button variant="primary" className="px-3">Sign in</Button>
                 </>
               )}
-            <Button variant="outline-success" className="ms-3 px-3">
-                <BsCart className="me-1 mb-1"/>Show cart
+            <Button variant="outline-success" className="ms-3 px-3" onClick={handleShowModal}>
+                <BsCart className="me-1 mb-1"/>Show cart({cartCount})
             </Button>
           </div>
         </Navbar.Collapse>

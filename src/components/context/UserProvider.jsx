@@ -9,6 +9,7 @@ const UserProvider = ({children}) => {
     }
 
     const [authenUser, setUser] = useState(null);
+    const [showModal, showModals] = useState(false);
 
     const login = () => {
         setUser(user);
@@ -18,11 +19,23 @@ const UserProvider = ({children}) => {
         setUser(null);
     }
 
+    const handleShowModal = () => {
+        showModals(true);
+    }
+
+    const handleCloseModal = () => {
+        showModals(false);
+    }
+    
     const contextValues = {
         authenUser,
         login,
-        logout
+        logout,
+        showModal,
+        handleShowModal,
+        handleCloseModal,
     }
+
     return (
         <UserContext.Provider value={contextValues}>
             {children}
