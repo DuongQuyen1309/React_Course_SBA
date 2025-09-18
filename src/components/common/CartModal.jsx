@@ -1,8 +1,11 @@
 import { Modal, Button } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
-const CartModal = ({showModals, cartItems, closeModals, removeItems}) => {
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
+const CartModal = ({showModals, closeModals, removeItems}) => {
     
-    const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+    const {cart} = useContext(UserContext);
+    const totalAmount = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     
     function FormatCurrency(amount){
         return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
@@ -14,7 +17,7 @@ const CartModal = ({showModals, cartItems, closeModals, removeItems}) => {
         </Modal.Header>
         <Modal.Body>
           {
-            cartItems.length > 0 ? (
+            cart.length > 0 ? (
                 <>
                     <Table className="border">
                         <thead>
@@ -30,7 +33,7 @@ const CartModal = ({showModals, cartItems, closeModals, removeItems}) => {
                         </thead>
                         <tbody>
                             {
-                                cartItems.map((item, index) => (
+                                cart.map((item, index) => (
                                     <tr key={index}>
                                         <td>{item.code}</td>
                                         <td>{item.title}</td>

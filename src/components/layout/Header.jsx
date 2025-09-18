@@ -8,7 +8,7 @@ import headerLogo from '../../assets/logo_pineapple.png';
 import UserContext from '../context/UserContext';
 import { useContext, useState, useEffect } from 'react';
 const Header = () => {
-  const {authenUser, login, logout, handleShowModal, handleCloseModal} = useContext(UserContext);
+  const {authenUser, login, logout, handleShowModal, cart} = useContext(UserContext);
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(()=> {
@@ -61,7 +61,7 @@ const Header = () => {
                 </>
               )}
             <Button variant="outline-success" className="ms-3 px-3" onClick={handleShowModal}>
-                <BsCart className="me-1 mb-1"/>Show cart({cartCount})
+                <BsCart className="me-1 mb-1"/>Show cart({cart.length})
             </Button>
           </div>
         </Navbar.Collapse>

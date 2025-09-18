@@ -54,15 +54,12 @@ async function mockCourseApi(){
     return promise;
 }
 
-function getCartInLocalStorage(){
-    const selectedItem = localStorage.getItem('myCart');
-    return selectedItem ? JSON.parse(selectedItem) : [];
-}
+
 const CourseDashBoard = () => {
     const [currentCourses, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [cart, setCart] = useState(getCartInLocalStorage());
-    const {showModal, handleCloseModal} = useContext(UserContext);
+
+    const {showModal, handleCloseModal, handleAddToCart, handleRemoveFromCart } = useContext(UserContext);
 
     useEffect(()=>{
         async function getCourse(){
@@ -73,30 +70,6 @@ const CourseDashBoard = () => {
         };
         getCourse();
     },[]);
-
-    useEffect(()=>{
-        localStorage.setItem('myCart', JSON.stringify(cart)); 
-        // json.stringify để chuyển một object/mảng sang chuỗi json vì trong setItem thì
-        // key là string(đã thỏa mãn) và value nếu lưu thẳng cart sẽ bị lỗi và ko đọc
-        // được nên phải chuyển sang chuỗi, muốn đọc lại, chuyển thành mảng/object thì sd json.parse
-    },[cart]);
-
-    function handleAddToCart(course) {
-        const existingItem = cart.find(item => item.code === course.code);
-        if (existingItem) {
-            const updatedCart = cart.map(item => 
-                item.code === course.code ? {...item, quantity: item.quantity + 1} : item);
-            setCart(updatedCart);
-        } else {
-            setCart([...cart, {...course, quantity: 1}]);
-        }
-        console.log(cart);
-    }
-
-    function handleRemoveFromCart(courseCode){
-        const updatedCart = cart.filter(item => item.code !== courseCode);
-        setCart(updatedCart);
-    }
     
     return (
     <Container>
@@ -104,7 +77,7 @@ const CourseDashBoard = () => {
         <Row>
             {courses.map((course, index) => {
                 return (
-                <Col md={3} className="mb-3">
+                <Col md={3} className="mb-3" key={index}>
                      <CourseCard course={course} onAddToCart={handleAddToCart}/>
                 </Col>);
             })}
@@ -127,7 +100,7 @@ const CourseDashBoard = () => {
                         {currentCourses?(
                             currentCourses.map((course, index) => {
                                 return(
-                                <tr>
+                                <tr key={index}>
                                     <td>{course.code}</td>
                                     <td>{course.title}</td>
                                     <td>{course.duration}</td>
@@ -151,7 +124,7 @@ const CourseDashBoard = () => {
                 <h5>Loading value....</h5>
             )
         }
-        <CartModal showModals = {showModal} cartItems = {cart} closeModals = {handleCloseModal} removeItems = {handleRemoveFromCart}/>
+        <CartModal showModals = {showModal} closeModals = {handleCloseModal} removeItems = {handleRemoveFromCart}/>
     </Container>
     );
 }
