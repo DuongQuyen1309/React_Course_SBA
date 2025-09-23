@@ -1,0 +1,198 @@
+{
+    "courses": [
+  {
+    "id": 1,
+    "code": "J100",
+    "title": "Java Core",
+    "duration": 3,
+    "price": 1500000,
+    "lecturer": "Nam",
+    "description": "Java SE Programming Language",
+    "completedLectures": 5,
+    "totalLectures": 10
+  },
+  {
+    "id": 2,
+    "code": "P200",
+    "title": "Python for Beginners",
+    "duration": 2,
+    "price": 1200000,
+    "lecturer": "Lan",
+    "description": "Learn Python basics with hands-on exercises",
+    "completedLectures": 4,
+    "totalLectures": 8
+  },
+  {
+    "id": 3,
+    "code": "WD300",
+    "title": "Web Development Fundamentals",
+    "duration": 4,
+    "price": 2000000,
+    "lecturer": "Huy",
+    "description": "HTML, CSS, and JavaScript from scratch",
+    "completedLectures": 6,
+    "totalLectures": 12
+  },
+  {
+    "id": 4,
+    "code": "JS210",
+    "title": "JavaScript Advanced",
+    "duration": 3,
+    "price": 1800000,
+    "lecturer": "Minh",
+    "description": "Deep dive into ES6+, async programming, and DOM manipulation",
+    "completedLectures": 2,
+    "totalLectures": 9
+  },
+  {
+    "id": 5,
+    "code": "DB150",
+    "title": "SQL and Database Design",
+    "duration": 3,
+    "price": 1600000,
+    "lecturer": "Trang",
+    "description": "Relational databases, SQL queries, and normalization",
+    "completedLectures": 7,
+    "totalLectures": 10
+  },
+  {
+    "id": 6,
+    "code": "R101",
+    "title": "React JS Essentials",
+    "duration": 2,
+    "price": 1700000,
+    "lecturer": "Khoa",
+    "description": "Build interactive UIs with React and hooks",
+    "completedLectures": 1,
+    "totalLectures": 7
+  },
+  {
+    "id": 7,
+    "code": "C220",
+    "title": "C# Programming",
+    "duration": 3,
+    "price": 1500000,
+    "lecturer": "Hằng",
+    "description": "C# fundamentals and OOP concepts",
+    "completedLectures": 3,
+    "totalLectures": 8
+  },
+  {
+    "id": 8,
+    "code": "M101",
+    "title": "Machine Learning Basics",
+    "duration": 4,
+    "price": 2500000,
+    "lecturer": "Phong",
+    "description": "Introduction to ML concepts, regression, and classification",
+    "completedLectures": 0,
+    "totalLectures": 10
+  },
+  {
+    "id": 9,
+    "code": "DS110",
+    "title": "Data Structures & Algorithms",
+    "duration": 3,
+    "price": 1900000,
+    "lecturer": "Thu",
+    "description": "Learn arrays, linked lists, trees, and sorting algorithms",
+    "completedLectures": 5,
+    "totalLectures": 11
+  },
+  {
+    "id": 10,
+    "code": "CS105",
+    "title": "Computer Networks",
+    "duration": 3,
+    "price": 1800000,
+    "lecturer": "Vinh",
+    "description": "Understand OSI model, TCP/IP, and network protocols",
+    "completedLectures": 6,
+    "totalLectures": 10
+  }
+],
+    "roles":[
+  { "id": 1, "name": "Admin" },
+  { "id": 2, "name": "User" },
+  { "id": 3, "name": "Manager" },
+  { "id": 4, "name": "Lecturer" },
+  { "id": 5, "name": "Student" },
+  { "id": 6, "name": "Editor" },
+  { "id": 7, "name": "Viewer" },
+  { "id": 8, "name": "Guest" },
+  { "id": 9, "name": "Support" },
+  { "id": 10, "name": "Developer" }
+],
+    "users": [
+  {
+    "id": 1,
+    "name": "Nguyen Van Admin",
+    "username": "admin",
+    "password": "123456",
+    "roleId": 1
+  },
+  {
+    "id": 2,
+    "name": "Tran Thi User",
+    "username": "user1",
+    "password": "123456",
+    "roleId": 2
+  },
+  {
+    "id": 3,
+    "name": "Le Van Manager",
+    "username": "manager1",
+    "password": "123456",
+    "roleId": 3
+  },
+  {
+    "id": 4,
+    "name": "Pham Van Lecturer",
+    "username": "lecturer1",
+    "password": "123456",
+    "roleId": 4
+  },
+  {
+    "id": 5,
+    "name": "Hoang Thi Student",
+    "username": "student1",
+    "password": "123456",
+    "roleId": 5
+  },
+  {
+    "id": 6,
+    "name": "Nguyen Van Editor",
+    "username": "editor1",
+    "password": "123456",
+    "roleId": 6
+  },
+  {
+    "id": 7,
+    "name": "Tran Van Viewer",
+    "username": "viewer1",
+    "password": "123456",
+    "roleId": 7
+  },
+  {
+    "id": 8,
+    "name": "Guest Account",
+    "username": "guest1",
+    "password": "123456",
+    "roleId": 8
+  },
+  {
+    "id": 9,
+    "name": "Customer Support",
+    "username": "support1",
+    "password": "123456",
+    "roleId": 9
+  },
+  {
+    "id": 10,
+    "name": "Dev Tester",
+    "username": "dev1",
+    "password": "123456",
+    "roleId": 10
+  }
+]
+}
