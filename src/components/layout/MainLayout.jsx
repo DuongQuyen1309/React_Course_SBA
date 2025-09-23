@@ -2,16 +2,14 @@ import Adverisment from './Advertisment';
 import Header from './Header';
 import Focus from './Focus';
 import Footer from './Footer';
-
-const MainLayout = ({children}) => {
+import { Outlet } from 'react-router-dom';
+const MainLayout = () => {
     return (
         <>
             <Header />
             <main>
-                {children}
+                <Outlet />
             </main>
-            <Adverisment />
-            <Focus />
             <Footer />
         </>
     );

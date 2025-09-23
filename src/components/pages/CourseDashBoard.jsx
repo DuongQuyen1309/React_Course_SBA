@@ -3,6 +3,8 @@ import { Container, Table, Button, Row, Col} from "react-bootstrap";
 import CourseCard from "../common/CourseCard";
 import CartModal from '../common/CartModal';
 import UserContext from '../context/UserContext';
+import CourseHome from "./CourseHome";
+import { getCourseApi } from "../api/courseApiService";
 const courses = [
     {
         code: "CSC101",
@@ -57,25 +59,32 @@ async function mockCourseApi(){
 
 const CourseDashBoard = () => {
     const [currentCourses, setCourse] = useState(null);
+    const [message, setMessage] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const {showModal, handleCloseModal, handleAddToCart, handleRemoveFromCart } = useContext(UserContext);
 
     useEffect(()=>{
-        async function getCourse(){
+        async function getCourses() {
             setLoading(true);
-            let data = await mockCourseApi();
-            setCourse(data);
-            setLoading(false);
+            try {
+                const receivedCourses = await getCourseApi();
+                setCourse(receivedCourses);
+                setLoading(false);
+            }catch (error){
+                setMessage(error || "Something went wrong!");
+            }
         };
-        getCourse();
+        getCourses();
     },[]);
-    
+    if(loading){
+        return <p>Loading...</p>;
+    }
     return (
     <Container>
         <h2>Course DashBoard</h2>
         <Row>
-            {courses.map((course, index) => {
+            {currentCourses.map((course, index) => {
                 return (
                 <Col md={3} className="mb-3" key={index}>
                      <CourseCard course={course} onAddToCart={handleAddToCart}/>

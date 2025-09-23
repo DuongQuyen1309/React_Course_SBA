@@ -1,6 +1,7 @@
 import Card from "react-bootstrap/Card";
 import {BsEyeFill, BsCartPlusFill} from "react-icons/bs";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 const CourseCard = ({course, onAddToCart}) => {
 
   function clickAddToCart(){
@@ -21,7 +22,7 @@ const CourseCard = ({course, onAddToCart}) => {
             {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(course.price)}
           </h4>
           <div className="d-grid gap-2 mt-3">
-            <Button variant="outline-primary" className="d-flex align-items-center justify-content-center">
+            <Button variant="outline-primary" as={Link} to={`/courses/${course.code}`} className="d-flex align-items-center justify-content-center">
               <BsEyeFill className="me-2" />
               Detail
             </Button>
